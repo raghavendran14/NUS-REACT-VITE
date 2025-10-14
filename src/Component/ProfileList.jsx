@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProfileViewer from "./ProfileViewer";
 import { Link, Outlet } from "react-router-dom";
+import { getUsers } from "../api/api"
 
 
 const profiles = [
@@ -34,17 +35,26 @@ const profiles = [
     },
 ];
 
+const fetchUsers = async () => {
+    try {
+        getUsers().then((data) => {
+            console.log(data)
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 function ProfilesList() {
     const [searchTerm, setSearchTerm] = useState("");
 
-    // useEffect(() => {
-    //     console.log("ProfilesList component mounted");
-
-    //     return () => {
-    //         console.log("ProfilesList component unmounted");
-    //     };
-    // }, [])
+    useEffect(() => {
+        console.log("ProfilesList component mounted");
+        fetchUsers();
+        // return () => {
+        //     console.log("ProfilesList component unmounted");
+        // };
+    }, [])
     return (
         <div>
             <div>
